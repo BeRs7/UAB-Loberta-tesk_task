@@ -23,17 +23,16 @@ def list(request):
         links = Link.objects.filter(check=True)
         if request.is_ajax():
             if request.POST['interval'] == 'true':
-                print("_____________________________________")
                 schedule, created = IntervalSchedule.objects.get_or_create(every=request.POST['number_of_periods'], period=IntervalSchedule.SECONDS)
-                print(schedule)
                 PeriodicTask.objects.create(interval=schedule, task='urls.tasks.check_link')
             else:
                 res = []
                 for i in links:
                     try:
-                        res.append(requests.get(i.url, verify=False).status_code)
+                        res.append(requests.get(i.url).status_code)
                     except:
-                        pass
+                        res.append('fail')
+
                 return JsonResponse({'res': res})
     else:
         return redirect('auth')

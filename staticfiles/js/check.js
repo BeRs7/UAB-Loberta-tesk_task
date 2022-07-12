@@ -17,7 +17,7 @@ check.addEventListener('submit', e=> {
         data: fd,
         success: function (response) {
             var list = document.getElementsByClassName('list-group-item')
-            for (i = 0; i <= list.length; i++) {
+            for (i = 0; i < list.length; i++) {
                 if (response.res[i] === 200) {
                     list[i].style.backgroundColor = "green"
                 }
