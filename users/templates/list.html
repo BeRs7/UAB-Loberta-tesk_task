@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}List{% endblock %}
+{% load static %}
+{% block content %}
+  <h1>List of Added URLs</h1>
+  <ul class="list-group">
+    {% for link in links %}
+      <li class="list-group-item">{{ link }}</li>
+    {% endfor %}
+  </ul>
+<form id="check">
+  {% csrf_token %}
+  <input type="submit" value="Check" onclick="check_func()" id="button"><br>
+</form>
+<form id="check_interval">
+  <input type="checkbox" id="interval" onclick="disabled_button()">
+  <h1>Check interval</h1>
+  <input type="text" id="number_of_periods">
+  <input type="text" id="interval_period">
+  <input type="submit" onclick="set_interval()" disabled id="interval_button" value="Set interval">
+</form>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'js/check.js' %}"></script>
+{% endblock %}
