@@ -1,0 +1,5 @@
+python manage.py runserver
+
+celery -A main worker --pool=solo -l info
+
+celery -A main beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler

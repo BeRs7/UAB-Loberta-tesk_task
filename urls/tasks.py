@@ -9,8 +9,9 @@ def check_link(self, *args, **kwargs):
     links = Link.objects.all()
     for i in links:
         try:
-            r = requests.get(i.url, verify=False).status_code
+            r = requests.get(i.url).status_code
             i.status_code = r
             i.save()
         except:
-            pass
+            i.status_code = 'fail'
+            i.save()
